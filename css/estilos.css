@@ -10,15 +10,17 @@ body{
 .conteiner-global{
     align-self: center;
     width: 100%;
-    height: 100vh;
+   
     text-align: center;
     
     
 }
 .item-header{
+    position: relative;
     margin: 30px;
     font-size: 30px;
-
+    left: 70px;
+    display: inline-block;
   
 }
 
@@ -43,7 +45,7 @@ body{
     font-family: monospace;
     
 }
-input[type=submit]{
+#btnNombre{
     background: violet;
     text-decoration: none;
     outline: none;
@@ -71,7 +73,6 @@ input[type=text]{
 .footer-conteiner{
     align-self: flex-end;
     bottom:0px;
-    position: absolute;
     left: 0;
     right: 0;
 }
@@ -79,4 +80,37 @@ input[type=text]{
     color: black;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
+}
+
+.item-upload{
+    background-position: center !important;
+    box-sizing: border-box;
+    padding-left: 30px;
+    margin-top: 20px;
+    margin-right: 20px;
+    background: url(/img/file-upload.svg) no-repeat;
+    background-size: contain;
+    padding: 0;
+    cursor: pointer;
+
+}
+.item-main3{
+    display: flex;
+    justify-content: center;
+}
+.upload{
+    position: relative;
+    right: 37px;
+    opacity: 0;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+}
+.item-upload-conteiner{
+    display: inline-flex;
+    flex-direction: column;
+    float: right;
+}
+.btnUpload{
+    margin: 10px 10px 0 0;
 }
