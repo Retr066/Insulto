@@ -16,3 +16,21 @@
     document.getElementById("conteiner-fotos").appendChild(img);
   };
 })();
+
+//para el servidor
+let btnUpload = document.getElementById(btnLoad);
+
+/* btnUpload.addEventListener("click", (e) => {
+  e.preventDefault();
+  axios
+    .post("http://localhost:5000/upload")
+    .then(function (response) {
+      console.log(response);
+    })
+    .then(function (data) {
+      console.log(data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}); */

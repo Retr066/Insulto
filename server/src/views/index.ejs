@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="StyleSheet " href="./css/estilos.css" type="text/css" />
+    <link  rel="stylesheet" href ='./css/estilos.css' />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Weber</title>
   </head>
@@ -15,8 +15,9 @@
           <p class="close">X</p>
 
           <div class="item-upload-conteiner">
+        <form action="/upload"  method="POST" enctype="multipart/form-data">
             <div class="item-upload">
-              <input type="file" id="upload" class="upload" />
+              <input type="file" id="upload" name="image" class="upload" multiple/>
             </div>
             <input
               type="submit"
@@ -25,6 +26,8 @@
               value="Sube tu fondo de pantalla"
             />
           </div>
+        </form>
+
           <div id="conteiner-fotos"></div>
         </div>
       </div>

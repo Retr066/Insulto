@@ -110,6 +110,7 @@ input[type=text]{
 .item-upload-conteiner{
     display: inline-flex;
     flex-direction: column;
+    margin: 0 150px 100px 150px;
     
 }
 .btnUpload{
@@ -121,6 +122,7 @@ input[type=text]{
   padding: 50px;
   background-repeat: no-repeat;
   background-size: cover;
+  height: 60px;
 }
 .conteiner-modal{
     
@@ -137,8 +139,8 @@ input[type=text]{
     align-items: center;
 }
 .modal{
-    width: 45%;
-    height: 50%;
+    width: auto;
+    height: auto;
     background: #fff;
     position: relative;
     transition: transform 1s;
@@ -185,13 +187,13 @@ input[type=text]{
     color: #fff;
 }
 #conteiner-fotos{
-    display: flex;
-    display: contents;
+    display: table-row-group;
     position: relative;
 
 }
 .upload-img{
-   
+    background-position: center;
+    background-size: cover;
     position: relative;
     margin: 5px;
     display: inline-flex;

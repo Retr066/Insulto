@@ -1,7 +1,7 @@
-const btnNombre = document.querySelector("#btnNombre");
-const nombre = document.querySelector("#nombre");
-const insulto = document.querySelector("#insulto");
-const area = document.querySelector("#area");
+let btnNombre = document.querySelector("#btnNombre");
+let nombre = document.querySelector("#nombre");
+let insulto = document.querySelector("#insulto");
+let area = document.querySelector("#area");
 
 btnNombre.addEventListener("click", () => {
   let valueNombre = nombre.value;
@@ -13,7 +13,6 @@ btnNombre.addEventListener("click", () => {
     alert("Porque favor coloca letras nomas");
   } else if (valueInsulto == "" || valueNombre == "") {
     alert("Escriba algun nombre con su insulto");
-    return false;
   } else {
     let code = `Tu victima se llama ${valueNombre} y es ${valueInsulto} ,en conclusion es un conshasumare :)    
      `;
