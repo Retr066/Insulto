@@ -3,7 +3,9 @@ const path = require("path");
 const multer = require("multer");
 
 const almacenar = multer.diskStorage({
-  destination: path.join(__dirname, "public/uploads"),
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, "public/uploads"));
+  },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
@@ -19,7 +21,7 @@ app.set("view engine", "ejs");
 //midlewares mutler el que procesa la img por nosotros
 app.use(
   multer({
-    almacenar,
+    almacenar: almacenar,
   }).array("image")
 );
 
