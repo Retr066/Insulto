@@ -1,15 +1,6 @@
 const express = require("express");
 const path = require("path");
-const multer = require("multer");
-
-const almacenar = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "public/uploads"));
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
+const router = require("./route/router");
 
 //inicializacion
 const app = express();
@@ -18,23 +9,10 @@ app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-//midlewares mutler el que procesa la img por nosotros
-app.use(
-  multer({
-    almacenar: almacenar,
-  }).array("image")
-);
-
 //cargar archivos staticos
 app.use(express.static(path.join(__dirname, "/public")));
 
 //rutas
-app.post("/upload", (req, res) => {
-  console.log(req.files);
-  res.send("subido");
-});
-app.get("/", function (req, res) {
-  res.render("index");
-});
-
+app.use(router);
+//abriendo el puerto
 app.listen(app.get("port"));
