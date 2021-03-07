@@ -33,7 +33,7 @@ function fileFilter(req, file, cb) {
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
-  limits: { fileSize: 7000000 },
+  limits: { fileSize: 5000000 },
 }).array("image", [8]);
 
 router.get("/", (req, res) => {

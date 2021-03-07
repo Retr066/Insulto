@@ -9,27 +9,33 @@ abrir.addEventListener("click", (e) => {
   modal.classList.toggle("modal-close");
 });
 //cerrar modal
-cerrar.addEventListener("click", () => {
+const cerrarModal = (e) => {
   modal.classList.toggle("modal-close");
   setTimeout(() => {
     modalConteiner.style.visibility = "hidden";
   }, 700);
-});
+};
+cerrar.addEventListener("click", cerrarModal);
+
 //cerrar modal cuando toques algo fuera del modadl
-window.addEventListener("click", (e) => {
+const windowCerrar = (e) => {
+  e.target.removeEventListener(e.type, windowCerrar);
   if (e.target == modalConteiner) {
     modal.classList.toggle("modal-close");
     setTimeout(() => {
       modalConteiner.style.visibility = "hidden";
     }, 800);
   }
-});
+};
+window.addEventListener("click", windowCerrar);
 //cerrar modal con la tecla esc
-document.body.addEventListener("keydown", function (event) {
+const cerrarEsc = (event) => {
+  event.target.removeEventListener("keydown", cerrarEsc);
   if (event.code === "Escape" || event.keyCode === 27) {
     modal.classList.toggle("modal-close");
     setTimeout(() => {
       modalConteiner.style.visibility = "hidden";
     }, 800);
   }
-});
+};
+document.body.addEventListener("keydown", cerrarEsc);

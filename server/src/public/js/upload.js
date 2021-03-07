@@ -1,11 +1,14 @@
 (function () {
   "use strict";
   const upload = document.querySelector("#upload");
-  upload.addEventListener("change", () => {
+  const formData = new FormData();
+  upload.addEventListener("change", (e) => {
     for (let i = 0; i < upload.files.length; i++) {
       const idImg = Math.floor(Math.random() * 50000) + "-" + Date.now();
       createImg(upload, i, idImg);
+      formData.append(idImg, upload.files[i]);
     }
+    e.target.value = "";
   });
   const createImg = (upload, iterador, idImg) => {
     var img = document.createElement("DIV");
@@ -19,7 +22,7 @@
     createButonClose(idImg);
   };
   const createButonClose = (idImg) => {
-    let butonClose = document.createElement("P");
+    let butonClose = document.createElement("DIV");
     butonClose.classList.add("close-buton");
     let x = document.createTextNode("x");
     butonClose.appendChild(x);
@@ -29,6 +32,7 @@
     if (e.target.classList.contains("close-buton")) {
       e.target.parentNode.remove();
       console.log(e.target);
+      formData.delete(e.target.parentNode.dataset.id);
     }
   });
 })();
