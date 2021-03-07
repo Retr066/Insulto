@@ -13,11 +13,11 @@ var storage = multer.diskStorage({
 });
 
 function fileFilter(req, file, cb) {
-  const types = /jpeg|jpg|png|gif|svg/;
-  const uperTypes = types.toUpperCase();
-  const filetypes = types.concat(uperTypes);
-  /* const filetypes = /jpeg|jpg|png|gif|svg|JPEG|JPG|PNG|GIF|SVG/; */
-  console.log(filetypes);
+  /* let valor = /jpeg|jpg|png|gif|svg/;
+  const uperTypes = valor.toLocaleUpperCase();
+  const filetypes = valor.concat(uperTypes); */
+  const filetypes = /jpeg|jpg|png|gif|svg|JPEG|JPG|PNG|GIF|SVG/;
+  /*  console.log(filetypes); */
   const mimetype = filetypes.test(file.mimetype);
   const extname = filetypes.test(path.extname(file.originalname));
   if (mimetype && extname) {
