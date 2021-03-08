@@ -10,7 +10,9 @@ btnNombre.addEventListener("click", () => {
     /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$/
   );
   if (!pattern.test(valueInsulto) || !pattern.test(valueNombre)) {
-    alert("Porque favor coloca letras nomas");
+    alert(
+      "Porque favor coloca letras nomas, y no puedo terminar o empezar con un espacio"
+    );
     /* else if (pattern.test(valueNombre)) {
     alert("Porque favor coloca letras nomas"); */
   } else if (

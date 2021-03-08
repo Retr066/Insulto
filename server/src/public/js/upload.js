@@ -2,15 +2,18 @@
   "use strict";
   const upload = document.querySelector("#upload");
   const formData = new FormData();
-  upload.addEventListener("change", (e) => {
+  upload.addEventListener("change", async (e) => {
     for (let i = 0; i < upload.files.length; i++) {
       const idImg = Math.floor(Math.random() * 50000) + "-" + Date.now();
       createImg(upload, i, idImg);
       formData.append(idImg, upload.files[i]);
     }
-    e.target.value = "";
+
+    // e.target.value = null;
+
+    console.log(e.target.value);
   });
-  const createImg = (upload, iterador, idImg) => {
+  const createImg = async (upload, iterador, idImg) => {
     var img = document.createElement("DIV");
     img.classList.add("upload-img", idImg);
     img.dataset.id = idImg;
@@ -21,14 +24,14 @@
     document.getElementById("conteiner-fotos").appendChild(img);
     createButonClose(idImg);
   };
-  const createButonClose = (idImg) => {
+  const createButonClose = async (idImg) => {
     let butonClose = document.createElement("DIV");
     butonClose.classList.add("close-buton");
     let x = document.createTextNode("x");
     butonClose.appendChild(x);
     document.getElementsByClassName(idImg)[0].appendChild(butonClose);
   };
-  document.body.addEventListener("click", (e) => {
+  document.body.addEventListener("click", async (e) => {
     if (e.target.classList.contains("close-buton")) {
       e.target.parentNode.remove();
       console.log(e.target);
@@ -36,21 +39,3 @@
     }
   });
 })();
-
-//para el servidor
-/* let btnUpload = document.getElementById(btnLoad); */
-
-/* btnUpload.addEventListener("click", (e) => {
-  e.preventDefault();
-  axios
-    .post("http://localhost:5000/upload")
-    .then(function (response) {
-      console.log(response);
-    })
-    .then(function (data) {
-      console.log(data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-}); */

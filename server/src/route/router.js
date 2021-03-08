@@ -4,26 +4,22 @@ const router = Router();
 const path = require("path");
 //midlewares mutler el que procesa la img por nosotros
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/uploads"));
+  destination: async function (req, file, cb) {
+    await cb(null, path.join(__dirname, "../public/uploads"));
   },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname.toLowerCase());
+  filename: async function (req, file, cb) {
+    await cb(null, Date.now() + "-" + file.originalname.toLowerCase());
   },
 });
 
-function fileFilter(req, file, cb) {
-  /* let valor = /jpeg|jpg|png|gif|svg/;
-  const uperTypes = valor.toLocaleUpperCase();
-  const filetypes = valor.concat(uperTypes); */
+async function fileFilter(req, file, cb) {
   const filetypes = /jpeg|jpg|png|gif|svg|JPEG|JPG|PNG|GIF|SVG/;
-  /*  console.log(filetypes); */
   const mimetype = filetypes.test(file.mimetype);
   const extname = filetypes.test(path.extname(file.originalname));
   if (mimetype && extname) {
-    return cb(null, true);
+    return await cb(null, true);
   }
-  cb(
+  await cb(
     new Error(
       `Solo se adminten imagenes con algunas de estas extensiones ${filetypes}`
     )
@@ -34,18 +30,21 @@ const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
   limits: { fileSize: 5000000 },
-}).array("image", [8]);
+}).array("image", [5]);
 
-router.get("/", (req, res) => {
-  res.render("index");
+router.get("/", async (req, res) => {
+  await res.render("index");
+});
+router.get("/uploads", async (req, res) => {
+  res.render("img-upload");
 });
 
-router.post("/upload", function (req, res) {
-  upload(req, res, function (err) {
+router.post("/upload", async function (req, res) {
+  upload(req, res, async function (err) {
     if (err instanceof multer.MulterError) {
       console.log("MulterError", err);
       return res.send({
-        error: "El tamaño de la imagen debe ser menor a 3 megas",
+        error: "Solo se adminten imagenes con un peso menor a 5 megas",
       });
     } else if (err) {
       console.log("UnhandledError", err);
@@ -55,10 +54,10 @@ router.post("/upload", function (req, res) {
       });
     }
     if (err) {
-      return res.sendStatus(403);
+      return await res.sendStatus(403);
     }
-    console.log("Se subio correctamente", req.files);
-    res.sendStatus(200);
+    console.log(req.files, "Se subio correctamente");
+    res.redirect("/");
   });
 });
 
