@@ -18,8 +18,13 @@
   },
   "homepage": "https://github.com/Retr066/Insulto#readme",
   "dependencies": {
+    "cloudinary": "^1.25.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "multer": "^1.4.2"
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "node-env-file": "^0.1.8"
   }
 }

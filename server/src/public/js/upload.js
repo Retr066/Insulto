@@ -9,7 +9,7 @@
       formData.append(idImg, upload.files[i]);
     }
 
-    // e.target.value = null;
+    //e.target.value = null;
 
     console.log(e.target.value);
   });

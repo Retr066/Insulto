@@ -9,5 +9,29 @@
 </head>
 <body>
     <h2>hola mundo</h2> 
+    <div  class="conteiner-img-udload">
+    <ul id="list">
+        
+    </ul>
+</div>
+    <script>
+        'use strict'
+ fetch('database.json',{
+     header:{'Content-Type':'application/json'}
+ })
+ .then((response)=>{return response.json();})
+ .then((data)=>{
+data.forEach((picture)=>{
+let image = new image();
+image.width =200;
+img.src = './uploads' +picture.idImg;
+let li = document.createElement('LI');
+li.appendChild(image);
+document.getElementById(list).appendChild(li);
+})
+
+ })
+    
+    </script>
 </body>
 </html>

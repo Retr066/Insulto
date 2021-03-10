@@ -2,6 +2,13 @@ const { Router } = require("express");
 const multer = require("multer");
 const router = Router();
 const path = require("path");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+require("dotenv").config();
+
+/* const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/duaj7oxcq/image/upload";
+const CLOUDINARY_USER = "Retr0"; */
+
 //midlewares mutler el que procesa la img por nosotros
 var storage = multer.diskStorage({
   destination: async function (req, file, cb) {
@@ -39,8 +46,14 @@ router.get("/uploads", async (req, res) => {
   res.render("img-upload");
 });
 
+/* router.post("/upload", async function (req, res) {
+  await cloudinary.uploader.upload(req.file.path);
+
+  res.redirect("/");
+}); */
+
 router.post("/upload", async function (req, res) {
-  upload(req, res, async function (err) {
+  await upload(req, res, async function (err) {
     if (err instanceof multer.MulterError) {
       console.log("MulterError", err);
       return res.send({
@@ -56,15 +69,27 @@ router.post("/upload", async function (req, res) {
     if (err) {
       return await res.sendStatus(403);
     }
+
+    cloudinary.config({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+
+    /* const uniqueFilename = new Date().toISOString();
+    const storage2 = new CloudinaryStorage({
+      cloudinary: cloudinary,
+      params: {
+        folder: "hentai",
+        format: async (req, file) => "png", 
+        public_id: (req, file) => uniqueFilename,
+      },
+    }); */
+
+    /*  cloudinary.uploader.upload(req.file.path); */
     console.log(req.files, "Se subio correctamente");
     res.redirect("/");
   });
 });
-
-/* router.post("/upload", upload, (req, res) => {
-  console.log(req.files);
-
-  res.send("subido");
-}); */
 
 module.exports = router;
